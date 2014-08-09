@@ -24,14 +24,14 @@ Transfer.create = function(obj, cb){
   });
 };
 
-Transfer.findById = function(accountId, cb) {
+Transfer.findByAccountId = function(accountId, cb) {
   Transfer.collection.find({
     $or: [
       {
-        toAccountId: new Mongo.ObjectID(accountId)
+        toAccountId: Mongo.ObjectID(accountId)
       },
       {
-        fromAccountId: new Mongo.ObjectID(accountId)
+        fromAccountId: Mongo.ObjectID(accountId)
       }
     ]
   }).toArray(cb);
