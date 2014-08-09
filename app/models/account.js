@@ -21,7 +21,10 @@ Object.defineProperty(Account, 'collection',{
 });
 
 Account.prototype.create = function(cb){
-  Account.collection.save(this, cb);
+  var account = this;
+  Account.collection.save(this, function(){
+    cb(account);
+  });
 };
 
 Account.findById = function(id, cb){

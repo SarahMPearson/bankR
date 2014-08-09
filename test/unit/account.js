@@ -56,7 +56,7 @@ describe('Account', function(){
   describe('.findById', function(){
     it('should find an Account by its ID', function(done){
       var accountId = '53e5659ee1eb2778810b9d4a';
-      Account.findById(accountId, function(err, account){
+      Account.findById(accountId, function(account){
         expect(account).to.be.instanceof(Account);
         done();
       });

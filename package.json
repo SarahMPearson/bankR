@@ -1,32 +1,41 @@
 {
-  "name": "bankR",
+  "name": "bankr",
   "version": "0.0.0",
-  "description": "a bank management app",
+  "description": "Bank app",
   "main": "app/index.js",
   "bin": {
     "coveralls":"./node_modules/coveralls/bin/coveralls.js"
   },
   "scripts": {
-    "test": "mocha test --recursive -R spec",
-     "coveralls":"./node_modules/mocha/bin/mocha test --recursive -r blanket -R mocha-lcov-reporter | coveralls"
-  },
+    "test": "mocha test --recursive -R spec", 
+    "coveralls":"./node_modules/mocha/bin/mocha test --recursive -r blanket -R mocha-lcov-reporter | coveralls"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SarahMPearson/bankR"
+    "url": "https://SarahMPearson/bankr"
   },
-  "author": "Sarah M. Pearson <sarahp@me.com>",
+  "author": "SarahPearson <Sarahp@me.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SarahMPearson/bankR/issues"
+    "url": "https://github.com/SarahMPearson/bankr/issues"
   },
-  "homepage": "https://github.com/SarahMPearson/bankR",
+  "homepage": "https://github.com/SarahMPearson/bankr",
   "config": {
     "blanket": {
       "pattern":"/app/"
     }
-  },   
-
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "body-parser": "^1.5.2",
+    "express": "^4.7.4",
+    "express-method-override": "0.0.3",
+    "jade": "^1.5.0",
+    "lodash": "^2.4.1",
+    "moment": "^2.8.1",
+    "mongodb": "^1.4.8",
+    "morgan": "^1.2.2"
+  },
   "devDependencies": {
     "blanket": "^1.1.6",
     "chai": "^1.9.1",
@@ -35,19 +44,8 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-watch": "^0.6.1",
     "jshint-stylish": "^0.4.0",
-    "mocha": "^1.21.4",
+    "mocha": "^1.21.3",
     "mocha-lcov-reporter": "0.0.1"
-  },
-  "dependencies": {
-    "async": "^0.9.0",
-    "body-parser": "^1.6.2",
-    "express": "^4.8.2",
-    "express-method-override": "0.0.3",
-    "jade": "^1.5.0",
-    "lodash": "^2.4.1",
-    "moment": "^2.8.1",
-    "mongodb": "^1.4.8",
-    "morgan": "^1.2.2",
-    "request": "^2.40.0"
   }
 }
+
