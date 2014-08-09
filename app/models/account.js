@@ -36,6 +36,15 @@ Account.findById = function(id, cb){
   });
 };
 
+Account.findAll = function(cb){
+  Account.collection.find().toArray(function(err, objects){
+    var accounts = objects.map(function(obj){
+      return changePrototype(obj);
+    });
+    cb(accounts);
+  });
+};
+
 module.exports = Account;
 
 // PRIVATE FUNCTIONS ///

@@ -62,5 +62,13 @@ describe('Account', function(){
       });
     });
   });
-
-}); 
+  describe('.findAll', function(){
+    it('should find all the accounts', function(done){
+      Account.findAll(function(accounts){
+        expect(accounts).to.have.length(6);
+        expect(accounts[0].name).to.equal('Jean Knight');
+        done();
+        });
+      });
+    });
+  }); 
