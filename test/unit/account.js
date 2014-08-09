@@ -26,7 +26,7 @@ describe('Account', function(){
   describe('constructor', function(){
     it('should create a new account', function(){
       var obj = {name:'Kate Capshaw', photo: 'http://www.123.com', accountType: 'savings', color: 'coral',
-      dateCreated: '2014-8-8', pin:'1234', initDeposit: '100', balance: '500' };
+        dateCreated: '2014-8-8', pin:'1234', initDeposit: '100', balance: '500' };
       var a = new Account(obj);
 
       expect(a).to.be.instanceof(Account);
@@ -68,7 +68,17 @@ describe('Account', function(){
         expect(accounts).to.have.length(6);
         expect(accounts[0].name).to.equal('Jean Knight');
         done();
-        });
       });
     });
-  }); 
+  });
+
+  describe('#withdraw', function(){
+    it('should withdraw money from account - normal', function(){
+      var sara = new Account(3, 'Sara', 1500, 'Savings');
+      sara.withdraw(500);
+      expect(sara.balance).to.equal(1000);
+      expect(sara.withdraws).to.have.length(1);
+    });
+  });
+
+}); // last bracket 

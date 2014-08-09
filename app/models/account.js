@@ -45,6 +45,20 @@ Account.findAll = function(cb){
   });
 };
 
+Account.prototype.withdraw = function(amount){
+  if(this.isSuspended){
+    return;
+  }
+
+  this.balance -= amount;
+  this.withdraws.push(amount);
+
+  if(this.balance < 0){
+    this.balance -= 50;
+    this.fees.push(50);
+    }
+};
+
 module.exports = Account;
 
 // PRIVATE FUNCTIONS ///

@@ -1,0 +1,17 @@
+extends ../shared/template
+block content
+  h2 Create an Account
+
+  form(methond='post', actions='/accounts')
+    input(name='name', type='text', placeholder='John Hancock', autofocus=true)
+    br
+    input(name='color', type='color')
+    br
+    input(name='photo', type='text')
+    br
+    input(name='pin', type='text')
+    br
+    select(name='accountType')
+      option(value='checking')
+      option(value='savings')
+    button Create
