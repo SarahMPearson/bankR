@@ -4,11 +4,11 @@
   "description": "Bank app",
   "main": "app/index.js",
   "bin": {
-    "coveralls":"./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "./node_modules/coveralls/bin/coveralls.js"
   },
   "scripts": {
-    "test": "mocha test --recursive -R spec", 
-    "coveralls":"./node_modules/mocha/bin/mocha test --recursive -r blanket -R mocha-lcov-reporter | coveralls"
+    "test": "mocha test --recursive -R spec",
+    "coveralls": "./node_modules/mocha/bin/mocha test --recursive -r blanket -R mocha-lcov-reporter | coveralls"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/SarahMPearson/bankr",
   "config": {
     "blanket": {
-      "pattern":"/app/"
+      "pattern": "/app/"
     }
   },
   "dependencies": {
@@ -48,4 +48,3 @@
     "mocha-lcov-reporter": "0.0.1"
   }
 }
-

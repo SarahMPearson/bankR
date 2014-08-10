@@ -24,10 +24,9 @@ Transaction.create = function(obj, cb){
   });
 };
 
-Transaction.findByAccountId = function(accountId, cb){
-  Transaction.collection.find({
-    accountId: Mongo.ObjectID(accountId)
-  }).toArray(cb);
+Transaction.findById = function(transactionId, cb){
+  var id = Mongo.ObjectID(transactionId);
+  Transaction.collection.findOne({_id:id}, cb);
 };
 
 

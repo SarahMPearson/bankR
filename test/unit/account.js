@@ -41,14 +41,14 @@ describe('Account', function(){
       expect(a.balance).to.equal(500);
     });
   });
-  describe('#create', function(){
-    it('should create a new account and save it to the database', function(done){
+  describe('#save', function(){
+    it('should save a new account and save it to the database', function(done){
       var obj = {name:'Kate Capshaw', photo: 'http://www.123.com', accountType: 'savings', color: 'coral',
         dateCreated: '2014-8-8', pin:'1234', initDeposit: '100', balance: '500' };
       var account = new Account(obj); 
-      account.create(function(result){  
-        expect(account).to.be.instanceof(Account);
-        expect(account._id).to.be.instanceof(Mongo.ObjectID);
+      account.save(function(result){  
+        expect(result).to.be.instanceof(Account);
+        expect(result._id).to.be.instanceof(Mongo.ObjectID);
         done();
       });
     });
@@ -58,6 +58,9 @@ describe('Account', function(){
       var accountId = '53e5659ee1eb2778810b9d4a';
       Account.findById(accountId, function(account){
         expect(account).to.be.instanceof(Account);
+        expect(account.name).to.equal('Jean Knight');
+        expect(account.transfers).to.have.length(1);
+        expect(account.transactions).to.have.length(1);
         done();
       });
     });
@@ -72,12 +75,45 @@ describe('Account', function(){
     });
   });
 
+  describe('#deposit', function(){
+    it('should allow accountholder to deposit money into account', function(done){
+      var id = '53e5659ee1eb2778810b9d4a';
+      Account.findById(id, function(account){
+        var initbalance = account.balance;
+        var deposit = 100;
+        account.deposit(deposit, function(cb){
+          expect(account.balance).to.equal(deposit + initbalance);
+          done();
+        });
+      });
+    });
+  });
+
   describe('#withdraw', function(){
-    it('should withdraw money from account - normal', function(){
-      var sara = new Account(3, 'Sara', 1500, 'Savings');
-      sara.withdraw(500);
-      expect(sara.balance).to.equal(1000);
-      expect(sara.withdraws).to.have.length(1);
+    it('should make a withdrawl from an account', function(done){
+      var id = '53e5659ee1eb2778810b9d4a';
+      Account.findById(id, function(account){
+        var initbalance = account.balance;
+        var withdrawl = 100;
+        account.withdraw(withdrawl, function(transaction){
+          expect(account.balance).to.equal(initbalance - withdrawl);
+          expect(transaction.fee).to.equal(0);
+          done();
+        });
+      });
+    });
+
+    it('should make a withdrawl from an account and add a od fee', function(done){
+      var id = '53e5659ee1eb2778810b9d4a';
+      Account.findById(id, function(account){
+        var initbalance = account.balance;
+        var withdrawl = 7600;
+        account.withdraw(withdrawl, function(transaction){
+          expect(account.balance).to.equal(initbalance - (withdrawl+50));
+          expect(transaction.fee).to.equal(50);
+          done();
+        });
+      });
     });
   });
 

@@ -53,11 +53,11 @@ describe('Transfer', function(){
     });
   
   });
-  describe('.findByAccountId', function(){
-    it('should find transfers by the toAccountId and fromAccountId', function(done){
-      var accountId = '53e5659ee1eb2778810b9d4a';
-      Transfer.findByAccountId(accountId, function(err, transfers){
-        expect(transfers).to.have.length.gt(0);
+  describe('.findById', function(){
+    it('should find transfers by the Id', function(done){
+      var transferId = '53e5965a2e13be436066fab8';
+      Transfer.findById(transferId, function(err, transfer){
+        expect(transfer._id.toString()).to.equal(transferId);
         done();
       });
     });

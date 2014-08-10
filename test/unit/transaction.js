@@ -25,13 +25,13 @@ describe('Transaction', function(){
 
   describe('constructor', function(){
     it('should create a new transaction', function(){
-      var obj = {type:'savings', date: '2014-8-8', fee: '0', 
+      var obj = {type:'withdrawl', date: '2014-8-8', fee: '0', 
       accountId: Mongo.ObjectID().toString(), amount: '100'};
       var t = new Transaction(obj);
 
       expect(t).to.be.instanceof(Transaction);
       expect(t).to.be.okay;
-      expect(t.type).to.equal('savings');
+      expect(t.type).to.equal('withdrawl');
       expect(t.date).to.be.instanceof(Date);
       expect(t.amount).to.equal(100.00);
       expect(t.fee).to.equal(0);
@@ -40,21 +40,20 @@ describe('Transaction', function(){
   });
   describe('.create', function(){
     it('should create a new transaction and save it to the database', function(done){
-      var obj = {type:'savings', date: '2014-8-8', fee: '0', 
+      var obj = {type:'withdrawl', date: '2014-8-8', fee: '0', 
       accountId: Mongo.ObjectID().toString(), amount: '100'};
       
       Transaction.create(obj, function(transaction){
-        expect(transaction).to.be.instanceof(Transaction);
         expect(transaction._id).to.be.instanceof(Mongo.ObjectID);
         done();
       });
     });
   });
-  describe('.findByAccountId', function(){
-    it('should find transactions by the AccountId', function(done){
-      var accountId = '53e5659ee1eb2778810b9d4a';
-      Transaction.findByAccountId(accountId, function(err, transactions){
-        expect(transactions).to.have.length.gt(0);
+  describe('.findById', function(){
+    it('should find transactions by the TransactionId', function(done){
+      var transactionId = '53e596422e13be436066f6d0';
+      Transaction.findById(transactionId, function(err, transaction){
+        expect(transaction._id.toString()).to.equal(transactionId);
         done();
       });
     });
